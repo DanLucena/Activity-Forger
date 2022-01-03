@@ -5,6 +5,7 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const size = 540;
+const animationSpeed = 15;
 let isOpen = true;
 
 // Scheme must be registered before the app is ready
@@ -33,7 +34,19 @@ async function createWindow() {
   })
 
   globalShortcut.register('F11', () => {
-    isOpen ? win.hide() : win.show();
+    if(isOpen){
+      let animationClose = setInterval(() => { 
+        (win.getPosition()[0] < width && !isOpen)
+          ? win.setPosition(win.getPosition()[0] + animationSpeed, 0)
+          : clearInterval(animationClose);
+      }, 1);
+    } else {
+      let animationOpen = setInterval(() => {
+        (win.getPosition()[0] > width - size && isOpen)
+          ? win.setPosition(win.getPosition()[0] - animationSpeed, 0) 
+          : clearInterval(animationOpen);
+      }, 1);
+    }
     isOpen = !isOpen;
   });
 

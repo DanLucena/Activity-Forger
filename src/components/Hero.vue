@@ -5,7 +5,9 @@
       Improve the organization and prioritization of your tasks with just a few
       clicks!
     </span>
-    <button>Get Started Now</button>
+    <div class="btn">
+      <button>Get Started Now</button>
+    </div>
     <span class="footer">
       <font-awesome-icon
         icon="code"
@@ -69,15 +71,26 @@ export default {
   color: #231a10;
   z-index: 10;
 }
-.hero-content button {
+.hero-content .btn {
   margin: 2.5rem 0 auto 0;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  z-index: 10;
+}
+.hero-content button {
   padding: 0.8rem 3rem;
   border: none;
   border-radius: 0.3rem;
   font-weight: 700;
   font-size: 1rem;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  z-index: 10;
+  color: #231a10;
+  background-color: #faf8ea;
+  box-shadow: inset 0 0 0 0 #d3caec;
+  transition: ease-out 0.3s;
+  outline: none;
+}
+.hero-content button:hover {
+  box-shadow: inset 225px 0 0 0 #ecc6f8;
+  cursor: pointer;
 }
 .footer {
   margin-bottom: 1rem;
