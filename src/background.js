@@ -16,6 +16,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const {height, width} = screen.getPrimaryDisplay().workAreaSize;
+  let isHide = false;
+
   const win = new BrowserWindow({
     width: size,
     height: height,
@@ -24,10 +26,8 @@ async function createWindow() {
     alwaysOnTop: true,
     frame: false,
     resizable: false,
+    skipTaskbar: true,
     webPreferences: {
-      
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
     }
@@ -37,18 +37,35 @@ async function createWindow() {
     if(isOpen){
       let animationClose = setInterval(() => { 
         (win.getPosition()[0] < width && !isOpen)
-          ? win.setPosition(win.getPosition()[0] + animationSpeed, 0)
-          : clearInterval(animationClose);
+          ? win.setPosition(win.getPosition()[0] + animationSpeed, 0, true)
+          : hideWindow(animationClose);
       }, 1);
     } else {
+      showWindow();
       let animationOpen = setInterval(() => {
         (win.getPosition()[0] > width - size && isOpen)
-          ? win.setPosition(win.getPosition()[0] - animationSpeed, 0) 
+          ? win.setPosition(win.getPosition()[0] - animationSpeed, 0, true) 
           : clearInterval(animationOpen);
       }, 1);
     }
     isOpen = !isOpen;
+    win.blur();
   });
+
+  function hideWindow(animationClose){
+    if(!isHide && !isOpen){
+      isHide = true;
+      win.hide();
+    }
+    clearInterval(animationClose); 
+  }
+
+  function showWindow(){
+    if(isHide){
+      isHide = false;
+      win.show();
+    }
+  }
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
