@@ -24,6 +24,9 @@ export default {
   font-family: "Inter", sans-serif;
   font-family: "Manrope", sans-serif;
 }
+a {
+  text-decoration: none;
+}
 button {
   cursor: pointer;
 }

@@ -6,7 +6,14 @@
       clicks!
     </span>
     <button>Get Started Now</button>
-    <span class="footer">Powered by DanLucena</span>
+    <span class="footer">
+      <font-awesome-icon
+        icon="code"
+        class="icon"
+        :style="{ color: '#231a10' }"
+      />Powered by
+      <strong>DanLucena</strong>
+    </span>
     <Particles
       id="tsparticles"
       :particlesInit="particlesInit"
@@ -75,6 +82,10 @@ export default {
 .footer {
   margin-bottom: 1rem;
   z-index: 10;
+  color: #231a10;
+}
+.icon {
+  margin-right: 0.5rem;
 }
 #tsparticles {
   position: fixed;
