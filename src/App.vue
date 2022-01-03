@@ -1,21 +1,10 @@
 <template>
   <div id="app">
-    <Hero />
+    <router-view />
   </div>
 </template>
 
-<script>
-import Hero from "./components/Hero.vue";
-
-export default {
-  name: "App",
-  components: {
-    Hero,
-  },
-};
-</script>
-
-<style>
+<style lang="less">
 * {
   margin: 0;
   padding: 0;
