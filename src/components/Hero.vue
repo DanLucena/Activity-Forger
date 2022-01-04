@@ -16,33 +16,12 @@
       />Powered by
       <strong>DanLucena</strong>
     </span>
-    <Particles
-      id="tsparticles"
-      :particlesInit="particlesInit"
-      :particlesLoaded="particlesLoaded"
-      :options="particlesOptions"
-    />
-    <Particles
-      id="tsbigparticles"
-      :particlesInit="particlesInit"
-      :particlesLoaded="particlesLoaded"
-      :options="gloobsOptions"
-    />
   </div>
 </template>
 
 <script>
-import { particlesOptions } from "../assets/particlesOptions";
-import { gloobsOptions } from "../assets/gloobsOptions";
-
 export default {
   name: "Hero",
-  data: () => {
-    return {
-      particlesOptions,
-      gloobsOptions,
-    };
-  },
 };
 </script>
 
@@ -99,11 +78,5 @@ export default {
 }
 .icon {
   margin-right: 0.5rem;
-}
-#tsparticles {
-  position: fixed;
-}
-#tsbigparticles {
-  position: fixed;
 }
 </style>
