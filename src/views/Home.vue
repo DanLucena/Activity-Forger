@@ -33,7 +33,7 @@ export default {
   },
   data: () => {
     return {
-      isAccountStateVisible: false,
+      isAccountStateVisible: true,
       particlesOptions,
       gloobsOptions,
     };
