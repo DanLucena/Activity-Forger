@@ -3,6 +3,8 @@
 import { app, protocol, BrowserWindow, screen, globalShortcut } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import os from 'os';
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const size = 540;
 const animationSpeed = 15;
@@ -34,6 +36,16 @@ async function createWindow() {
   })
 
   globalShortcut.register('F11', () => {
+    if(os.platform() === 'win32') {
+      animationInWindowsOS();
+      win.blur();
+    }else{
+      isOpen ? win.hide() : win.show();
+    }
+    isOpen = !isOpen;
+  });
+
+  function animationInWindowsOS(){
     if(isOpen){
       let animationClose = setInterval(() => { 
         (win.getPosition()[0] < width && !isOpen)
@@ -48,9 +60,7 @@ async function createWindow() {
           : clearInterval(animationOpen);
       }, 1);
     }
-    isOpen = !isOpen;
-    win.blur();
-  });
+  }
 
   function hideWindow(animationClose){
     if(!isHide && !isOpen){
